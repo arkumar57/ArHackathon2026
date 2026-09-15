@@ -13,6 +13,8 @@ SUCCESS_MESSAGES = [
 ]
 from urllib.parse import urlsplit, parse_qsl
 
+//hello
+
 def main():
     with open('team.json', 'r') as f:
         team_data = json.load(f)
