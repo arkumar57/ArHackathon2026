@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "max_time_steps": 90,
+    "description": "Custom 5 - ID-Prioritization Dynamic Cutting: the engine polls drive units in ascending ID order and commits each move immediately. Low-ID unit 1 shuttles a continuous stream of pods back and forth across a capacity-1 choke node, while high-ID unit 99 must cross the same choke to deliver an urgent pod. Because unit 1 is always polled first, it reclaims the choke every single time step and unit 99 is cut off repeatedly. A planner that models the engine's ID ordering can hold unit 1 for a couple of steps so unit 99 slips through once."
+  },
+  "nodes": [
+    {"id": 0, "name": "Station-East", "type": "station", "capacity": 1},
+    {"id": 1, "name": "Choke", "type": "travel", "capacity": 1},
+    {"id": 2, "name": "Yard-West", "type": "travel", "capacity": 2},
+    {"id": 3, "name": "Storage-West", "type": "storage"},
+    {"id": 4, "name": "Station-West", "type": "station", "capacity": 1},
+    {"id": 5, "name": "Storage-East", "type": "storage"}
+  ],
+  "edges": [
+    {"from_node": 5, "to_node": 1, "weight": 1, "capacity": 1},
+    {"from_node": 1, "to_node": 0, "weight": 1, "capacity": 1},
+    {"from_node": 1, "to_node": 2, "weight": 1, "capacity": 1},
+    {"from_node": 2, "to_node": 3, "weight": 1},
+    {"from_node": 2, "to_node": 4, "weight": 1}
+  ],
+  "drive_units": [
+    {"id": 1, "start_node": 3},
+    {"id": 99, "start_node": 5}
+  ],
+  "pods": [
+    {"id": "P-A", "source_node": 3, "destination_station": 0, "entry_time": 0},
+    {"id": "P-B", "source_node": 4, "destination_station": 0, "entry_time": 0},
+    {"id": "P-C", "source_node": 3, "destination_station": 0, "entry_time": 0},
+    {"id": "P-99", "source_node": 5, "destination_station": 4, "entry_time": 0}
+  ]
+}

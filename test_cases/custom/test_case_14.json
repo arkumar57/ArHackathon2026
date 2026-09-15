@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "max_time_steps": 80,
+    "description": "Custom 2 - Greedy Swarm Starvation: ten drive units share a fleet bay, and a cluster of pods spawns in one isolated storage zone that is reachable only through a capacity-1 gate. A naive allocator sends every unit at the cluster, so up to nine of them jam bumper-to-bumper behind the gate and behind whichever low-ID unit grabbed the pod first. A centralized task allocator should send only as many units as the gate and docks can feed, and park the rest."
+  },
+  "nodes": [
+    {"id": 0, "name": "Fleet-Bay", "type": "travel", "capacity": 20},
+    {"id": 1, "name": "Gate", "type": "travel", "capacity": 1},
+    {"id": 2, "name": "Isolated-Storage", "type": "storage"},
+    {"id": 3, "name": "Station", "type": "station", "capacity": 1}
+  ],
+  "edges": [
+    {"from_node": 0, "to_node": 1, "weight": 1, "capacity": 1},
+    {"from_node": 1, "to_node": 2, "weight": 1, "capacity": 1},
+    {"from_node": 1, "to_node": 3, "weight": 3, "capacity": 1}
+  ],
+  "drive_units": [
+    {"id": 0, "start_node": 0},
+    {"id": 1, "start_node": 0},
+    {"id": 2, "start_node": 0},
+    {"id": 3, "start_node": 0},
+    {"id": 4, "start_node": 0},
+    {"id": 5, "start_node": 0},
+    {"id": 6, "start_node": 0},
+    {"id": 7, "start_node": 0},
+    {"id": 8, "start_node": 0},
+    {"id": 9, "start_node": 0}
+  ],
+  "pods": [
+    {"id": "P1", "source_node": 2, "destination_station": 3, "entry_time": 0},
+    {"id": "P2", "source_node": 2, "destination_station": 3, "entry_time": 0},
+    {"id": "P3", "source_node": 2, "destination_station": 3, "entry_time": 0},
+    {"id": "P4", "source_node": 2, "destination_station": 3, "entry_time": 4},
+    {"id": "P5", "source_node": 2, "destination_station": 3, "entry_time": 8}
+  ]
+}

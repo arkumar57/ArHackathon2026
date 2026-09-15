@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "max_time_steps": 40,
+    "description": "Custom 3 - Station Dock Squatting: the only station has a single dock (capacity 1). Drive unit 0 delivers a pod, then becomes idle and is free to sit on the dock forever. While it squats, drive units 1 and 2 are inbound with more pods but cannot take the dock slot, so those pods score zero. An eviction protocol that immediately routes empty units away from a station is the only way to keep the dock turning over."
+  },
+  "nodes": [
+    {"id": 0, "name": "Storage-A", "type": "storage"},
+    {"id": 1, "name": "Storage-B", "type": "storage"},
+    {"id": 2, "name": "Approach", "type": "travel", "capacity": 2},
+    {"id": 3, "name": "Station-1", "type": "station", "capacity": 1}
+  ],
+  "edges": [
+    {"from_node": 0, "to_node": 2, "weight": 2},
+    {"from_node": 1, "to_node": 2, "weight": 2},
+    {"from_node": 2, "to_node": 3, "weight": 3}
+  ],
+  "drive_units": [
+    {"id": 0, "start_node": 0},
+    {"id": 1, "start_node": 1},
+    {"id": 2, "start_node": 1}
+  ],
+  "pods": [
+    {"id": "P1", "source_node": 0, "destination_station": 3, "entry_time": 0},
+    {"id": "P2", "source_node": 1, "destination_station": 3, "entry_time": 0},
+    {"id": "P3", "source_node": 1, "destination_station": 3, "entry_time": 2}
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "max_time_steps": 70,
+    "description": "Custom 6 - Door Mat Blockade: storage node Staging has capacity 1, and drive unit 0 starts parked on it. New pods keep spawning on that very node, so the parked unit is a door mat: it occupies the only slot, auto-picks the first spawn (pickups are automatic), and if its optimizer ever tells it to wait it hoards the pod forever while every inbound delivery unit is blocked from entering the node. Keeping the staging node clear, or treating the parked unit as a normal carrier and routing it out, is the fix."
+  },
+  "nodes": [
+    {"id": 0, "name": "Staging", "type": "storage", "capacity": 1},
+    {"id": 1, "name": "Hall", "type": "travel", "capacity": 2},
+    {"id": 2, "name": "Cross", "type": "travel", "capacity": 2},
+    {"id": 3, "name": "Deck", "type": "travel", "capacity": 2},
+    {"id": 4, "name": "Side-Storage", "type": "storage", "capacity": 2},
+    {"id": 5, "name": "Station", "type": "station", "capacity": 2}
+  ],
+  "edges": [
+    {"from_node": 0, "to_node": 1, "weight": 1, "capacity": 2},
+    {"from_node": 1, "to_node": 2, "weight": 1, "capacity": 2},
+    {"from_node": 2, "to_node": 3, "weight": 1, "capacity": 2},
+    {"from_node": 2, "to_node": 4, "weight": 2, "capacity": 2},
+    {"from_node": 3, "to_node": 5, "weight": 1, "capacity": 2}
+  ],
+  "drive_units": [
+    {"id": 0, "start_node": 0},
+    {"id": 1, "start_node": 4},
+    {"id": 2, "start_node": 4}
+  ],
+  "pods": [
+    {"id": "P1", "source_node": 0, "destination_station": 5, "entry_time": 0},
+    {"id": "P2", "source_node": 0, "destination_station": 5, "entry_time": 0},
+    {"id": "P3", "source_node": 0, "destination_station": 5, "entry_time": 6},
+    {"id": "P4", "source_node": 0, "destination_station": 5, "entry_time": 12},
+    {"id": "P5", "source_node": 0, "destination_station": 5, "entry_time": 18}
+  ]
+}

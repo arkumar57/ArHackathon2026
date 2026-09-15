@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "max_time_steps": 90,
+    "description": "Custom 1 - Narrow Corridor Deadlock: two drive units start at opposite ends of a long corridor and must cross it head-on. Corridor edges carry capacity 2, so both units CAN get onto the aisle at once, but the single middle node has capacity 1. Without a space-time reservation table, both units charge in, meet at the middle, and one wastes step after step trying to claim the same slot the other already reserved."
+  },
+  "nodes": [
+    {"id": 0, "name": "Storage-South", "type": "storage"},
+    {"id": 1, "name": "Corridor-South", "type": "travel"},
+    {"id": 2, "name": "Corridor-Mid", "type": "travel", "capacity": 1},
+    {"id": 3, "name": "Corridor-North", "type": "travel"},
+    {"id": 4, "name": "Storage-North", "type": "storage"},
+    {"id": 5, "name": "Station-South", "type": "station", "capacity": 1},
+    {"id": 6, "name": "Station-North", "type": "station", "capacity": 1}
+  ],
+  "edges": [
+    {"from_node": 0, "to_node": 5, "weight": 2},
+    {"from_node": 0, "to_node": 1, "weight": 4, "capacity": 2},
+    {"from_node": 1, "to_node": 2, "weight": 4, "capacity": 2},
+    {"from_node": 2, "to_node": 3, "weight": 4, "capacity": 2},
+    {"from_node": 3, "to_node": 4, "weight": 4, "capacity": 2},
+    {"from_node": 4, "to_node": 6, "weight": 2}
+  ],
+  "drive_units": [
+    {"id": 0, "start_node": 0},
+    {"id": 1, "start_node": 4}
+  ],
+  "pods": [
+    {"id": "P1", "source_node": 0, "destination_station": 6, "entry_time": 0},
+    {"id": "P2", "source_node": 4, "destination_station": 5, "entry_time": 0}
+  ]
+}

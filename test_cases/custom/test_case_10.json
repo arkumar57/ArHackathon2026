@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "max_time_steps": 120,
+    "description": "Custom 4 - Ping-Pong Path Oscillation: two drive units must cross the same two-lane corridor in opposite directions, and both parallel lanes are exactly equal length (weight 7) with capacity-1 lane edges. A myopic planner that re-evaluates the lane choice every time step sees the other unit on its lane and toggles back and forth (east, west, east, west) without committing, wasting step after step. The winning policy is to commit to one lane and hold it; a space-time planner decides the lane split once up front."
+  },
+  "nodes": [
+    {"id": 0, "name": "Storage-North", "type": "storage"},
+    {"id": 1, "name": "Station-North", "type": "station", "capacity": 2},
+    {"id": 2, "name": "Hub-North", "type": "travel", "capacity": 3},
+    {"id": 3, "name": "East-Lane", "type": "travel", "capacity": 2},
+    {"id": 4, "name": "West-Lane", "type": "travel", "capacity": 2},
+    {"id": 5, "name": "Hub-South", "type": "travel", "capacity": 3},
+    {"id": 6, "name": "Storage-South", "type": "storage"},
+    {"id": 7, "name": "Station-South", "type": "station", "capacity": 2}
+  ],
+  "edges": [
+    {"from_node": 0, "to_node": 2, "weight": 1},
+    {"from_node": 1, "to_node": 2, "weight": 1},
+    {"from_node": 2, "to_node": 3, "weight": 6, "capacity": 1},
+    {"from_node": 3, "to_node": 5, "weight": 1, "capacity": 1},
+    {"from_node": 2, "to_node": 4, "weight": 6, "capacity": 1},
+    {"from_node": 4, "to_node": 5, "weight": 1, "capacity": 1},
+    {"from_node": 5, "to_node": 6, "weight": 1},
+    {"from_node": 5, "to_node": 7, "weight": 1}
+  ],
+  "drive_units": [
+    {"id": 0, "start_node": 0},
+    {"id": 1, "start_node": 6}
+  ],
+  "pods": [
+    {"id": "P1", "source_node": 0, "destination_station": 7, "entry_time": 0},
+    {"id": "P2", "source_node": 6, "destination_station": 1, "entry_time": 0}
+  ]
+}
